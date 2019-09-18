@@ -40,6 +40,9 @@ void Chart::initChart(QCustomPlot *ChartWidget)
     m_customPlot->addGraph();//添加graph等价于添加新曲线
     m_customPlot->graph(4)->setPen(QPen(Qt::cyan, 3));
 
+    // 最开始设置Y轴的范围为0-1000
+    m_customPlot->yAxis->setRange(0, 1000);
+
     // 创建时间坐标轴
     QSharedPointer<QCPAxisTickerTime> timeTicker(new QCPAxisTickerTime);
     timeTicker->setTimeFormat("%s");
@@ -224,8 +227,6 @@ void Chart::adaptiveAll()
 void Chart::mouseCoordConver(QMouseEvent *event)
 {
     // 把鼠标坐标点 转换为 QCustomPlot 内部坐标值 （pixelToCoord 函数）
-//    float x_val = static_cast<float>(m_customPlot->xAxis->pixelToCoord(event->pos().x()));
-//    float y_val = static_cast<float>(m_customPlot->yAxis->pixelToCoord(event->pos().y()));
     double x_val = m_customPlot->xAxis->pixelToCoord(event->pos().x());
     double y_val = m_customPlot->yAxis->pixelToCoord(event->pos().y());
 
